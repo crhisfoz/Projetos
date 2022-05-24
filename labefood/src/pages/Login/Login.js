@@ -1,34 +1,26 @@
-import React from 'react'
-import logo from '../../assets/logo-login.png'
-import { LoginContainer, StyleButton, FormContainer } from './styled'
-import LoginForm from '../../components/LoginForm/LoginForm'
-import { goToSignUp } from '../../routes/coordinator'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
 import { Button } from "@material-ui/core";
+import Header from "../../components/Header/Header";
+import useProtectedPage from "../../components/Hooks/useProtectPage";
+import {
+    LoginContainer,
+    SignUpButtonContainer
+} from './styles'
+import LoginForm from "./LoginForm";
+import Arrow from "../../components/Arrow/Arrow";
 
 const Login = () => {
-  const navigate = useNavigate()
-  return (<>
-    <LoginContainer>
-      <img src={logo} />
-      <FormContainer>
-        <h2> Entrar</h2>
-        <LoginForm />
-       
-        <StyleButton>
-          <Button
-           onClick={() =>  goToSignUp(navigate) 
-           }>Entrar</Button>
-           </StyleButton>
+    useProtectedPage()
 
-      </FormContainer>
-      Não possui cadastro? Clique aqui.
-
-
-    </LoginContainer>
-  </>
-
-  )
+    return(
+        <LoginContainer className="login-container">
+            <Header heigth={'3em'} />            
+            <LoginForm />
+            <SignUpButtonContainer>
+                Não possui cadastro? Clique <a href="./signup">aqui.</a>
+            </SignUpButtonContainer>
+        </LoginContainer>
+    )
 }
 
-export default Login
+export default Login;
