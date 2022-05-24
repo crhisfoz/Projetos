@@ -1,70 +1,147 @@
-# Getting Started with Create React App
+<h1 align="center">Labe 4Foods - A - Labenu</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p>Link do Surge: <a href="https://nonstop-vest.surge.sh/" target="blank"> Projeto Pokedex</a>.</p>
 
-## Available Scripts
+Dados de Entrada <br>
+👤usuário: testelabenu2022@email.com<br>
+🔑 senha : labteste
+<h4 align="center"> 
+    :construction:  :hammer: Projeto em construção :hammer: :construction:
+</h4>
 
-In the project directory, you can run:
+<h1 id="topo">Conteúdo</h1>
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+   * [Sobre](#sobre)
+   
+   * [O que funciona](#funciona)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+   * [O que ainda não funciona](#nfunciona)
+   
+   * [Como usar](#como-usar)
+   
+   * [Pré-Requisitos](#pre-requisitos)
+   
+   * [Tecnologias](#tecnologias)
+      * Styled-components
+      * Bootstrap v5.0
+      * React Router
+      * React hooks
+      * API
+      * Material UI
+    
+   * [Imagens](#images)
+        *  * [Tela de entrada](#entrada)
+        *  * [Tela de login](#login)
+        *  * [Tela de login - Preenchida](#login2)
+        *  * [Tela de cadastro do usuário](#cadastrouser)
+        *  * [Tela de cadastro de endereço](#cadastroend)
+        *  * [Tela de restaurantes](#rest)
+        *  * [Tela do carrinho sem pedido](#carvazio)
+        *  * [Tela do carrinho](#carrinho)
+        *  * [Tela do pedido em andamento](#andamento)
+        *  * [Tela do pedido concluído](#concluido)
+        *  * [Tela do perfil](#perfil)
+        *  * [Tela de editar perfil](#editperfil)
+        *  * [Tela de editar endereço](#editend)
+        
 
-### `npm test`
+<h2 id="sobre">:notebook: Sobre </h2> 
+💬 Nós, estudantes da  <a href="http://www.labenu.com.br" target="_blank">Labenu</a>  , somos desafiados a cada projeto, realizá-lo com excelência, paixão e conhecimento.
+Este projeto atual temos que criar uma aplicação nos moldes do App Ifood
+<h4 align="right"><a href="#topo">Topo</a></h4>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<h2 id="funciona">:rocket: O que funciona </h2>
 
-### `npm run build`
+➡️Rotas<br>
+➡️Cadastro de usuário (dados pessoais e endereço)<br>
+➡️Login<br>
+➡️Logout<br>
+➡️Escolha do restaurante<br>
+➡️Busca do restaurante por nome<br>
+➡️Escolha de produtos com a quantidade<br>
+➡️Adicionar ao carrinho<br>
+➡️Excluir do carrinho<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<h4 align="right"><a href="#topo">Topo</a></h4>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<h2 id="nfunciona">:rocket: O que ainda não funciona </h2>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+❎Responsividade Desktop da página de Perfil <br>
+❎Bug Tela de Carrinho, não seta o carrinho para 0 produto depois de efetuado o pedido<br>
+❎Escolha do tipo de comida, o filtro estava funcionando direito, porém do nada deu um bug e parou de funcionar<br>
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<h4 align="right"><a href="#topo">Topo</a></h4>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<h2 id="como-usar">:computer: Como Usar </h2>
+📱Faça seu cadastro com nome, e-mail, CPF e senha.<br>
+📱Adicione seu endereço completo para poder efetuar os pedidos.<br>
+📱Busque pelo seu restaurante favorito.<br>
+📱Faça seu pedido e confirme a forma de pagamento, você terá a soma dos itens pedido acrescido do valor da entrega para a sua região.<br>
+<h4 align="right"><a href="#topo">Topo</a></h4>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<h2 id="pre-requisitos">✅ 🖼️ Pré-requisitos </h2>
+Para começar, você terá que  instalar em sua máquina as seguintes ferramentas: Git, Node.js. e um editor de código-fonte para trabalhar com o código, nós usamos o VS Code
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+# Clone este repositório
+$ git clone https://github.com/future4code/Guimaraes-labe-food3
 
-## Learn More
+# Acesse a pasta do projeto no terminal
+$ cd ./Guimaraes-labe-food3
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Instale as dependências
+$ npm i ou npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Para iniciar o projeto
+$ npm start
 
-### Code Splitting
+# O servidor inciará na porta:3000 - acesse <http://localhost:3000>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<h4 align="right"><a href="#topo">Topo</a></h4>
 
-### Analyzing the Bundle Size
+<h2 id="images">🖼️ Imagens </h2>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<h3 id="entrada">Tela de Login</h3>
+<img alt="Tela de entrada" width="800"height="537" src="https://user-images.githubusercontent.com/89948060/168537249-d1318c0f-d84d-42eb-8b79-ebc142a49900.jpg" />
+<h4 align="right"><a href="#topo">Topo</a></h4>
 
-### Making a Progressive Web App
+<h3 id="entrada">Tela do Restaurante</h3>
+<img alt="Tela de entrada" width="800" height="537" src="https://user-images.githubusercontent.com/89948060/168537608-9fc46356-d4bc-4060-b90d-48fe7b876c09.jpg" />
+<h4 align="right"><a href="#topo">Topo</a></h4>
+<h3 id="entrada">Tela de Login</h3>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<img alt="Tela de Carrinho" width="800" height="537" src="https://user-images.githubusercontent.com/89948060/168537616-53e3f664-f95e-4f12-a65c-98d19af4f005.jpg" />
+<h4 align="right"><a href="#topo">Topo</a></h4>
+<h3 id="entrada">Tela de Login</h3>
 
-### Advanced Configuration
+<h4 align="right"><a href="#topo">Topo</a></h4>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h2 align="center">
+🤓📚
+Desenvolvido por: 
+</h2>
+<table align="center">
+  <tr>
+      <td align="center"><a href="https://github.com/crhisfoz">
+        <img src="https://avatars.githubusercontent.com/u/89948060?v=4" style="border-radius: 50%" width="100px" alt="Imagem do perfil do Guilherme"/>
+      <br />
+        <sub><b>Crhistian Felipe da Silva</b></sub>
+      <br />
+      </td>
+      <td align="center"><a href="https://github.com/T3lo5">
+        <img src="https://avatars.githubusercontent.com/u/72330142?v=4" style="border-radius: 50%" width="100px" alt="Imagem do perfil de Matheus" />
+      <br />
+        <sub><b>Anderson Franciscato</b></sub>
+      <br />
+      </td>  
+      <td align="center"><a href="https://github.com/IGBxRobinho">
+        <img src="https://avatars.githubusercontent.com/u/14117524?v=4" style="border-radius: 50%" width="100px" alt="Imagem do perfil de Junio Batista"/>
+      <br />
+        <sub><b>Robson Rodrigues Ribeiro</b></sub>
+      <br />
+      <td align="center"><a href="https://github.com/RickHardBR/RickHardBR#readme">
+       
+</table>

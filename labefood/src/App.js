@@ -1,24 +1,25 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { goToLogin } from './routes/coordinator';
-import logo from './assets/logo.png'
+import ifuture from './assets/ifuture-image.png'
+
+
 import {
   InitialContainer 
 } from './styles';
 
-
 const App = () => {
-  const navigate = useNavigate();
+  const navegate = useNavigate();
 
-   useEffect(()=>{
+  useEffect(()=>{
     setTimeout(()=>{
-      goToLogin(navigate)
+      goToLogin(navegate)
     },3000)
   },[])
- 
+
   return (<InitialContainer className='main-container'>
-    <div >
-      <img src={logo}/>
+    <div className='main'>
+      <img src={ifuture}/>
     </div>
     </InitialContainer>);
 }
