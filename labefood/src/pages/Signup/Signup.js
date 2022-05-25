@@ -9,7 +9,7 @@ import Arrow from "../../components/Arrow/Arrow";
 import SignUpForm from "./SignUpForm"
 import { goToLogin } from "../../routes/coordinator";
 
-const SignUp = () => {
+const Signup = () => {
     const navigate = useNavigate()
     return(
         <LoginContainer className="login-container">
@@ -20,4 +20,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp;
+export default Signup;

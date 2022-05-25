@@ -3,7 +3,7 @@ import { BASE_URL} from '../constants/urls'
 
 const headers = { 'Content-Type': 'application/json' }
 
-export const signup = async (body) =>
+ export const signUp = async (body) =>
     await axios.post(`${BASE_URL}/signup`, body,
         { headers: headers })
         .then(response => {

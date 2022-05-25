@@ -29,7 +29,6 @@ export const InputsContainer = styled.div`
         cursor: pointer;
     }
     form > button{
-        background-color: var(--red);
         margin: 0.5em;
     }
     .MuiFormControl-marginNormal{
