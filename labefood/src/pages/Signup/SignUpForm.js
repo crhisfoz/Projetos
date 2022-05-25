@@ -1,74 +1,31 @@
-import { Button, TextField } from "@material-ui/core";
-import React, { useContext } from "react";
-import useForm from "../../hooks/useForm";
-import { InputsContainer } from "./styles";
-import { signup } from "../../Services/auth"
-import { useNavigate} from 'react-router-dom'
-import { goToAddress, goToFourFood } from "../../routes/coordinator";
+import { Button, TextField, InputAdornment } from "@material-ui/core";
+import {Visibility, VisibilityOff} from '@material-ui/icons'
+import React, {useState} from "react";
+import { InputsContainer } from "./styles"
 
-import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
-import { message } from "../../utils/message";
-import { GlobalStateContext } from "../../Context/GlobalState/GlobalStateContext";
+
 
 const SignUpForm = () => {
-    const navigate = useNavigate();
-    const { setters } = useContext(GlobalStateContext)
 
-    const [form, onChange] = useForm({
-        name: "", 
-        email: "", 
-        cpf: "",
-        password: "",
-        confirmarSenha: ""
-    });
+    const [showPassword, setShowPassword] = useState(false);
 
-    const onSubmitForm = async (event) =>{
-        event.preventDefault();
-
-        let user = {
-            name: form.name,
-            email: form.email,
-            cpf: form.cpf,
-            password: form.password
-        }
-        
-        if(form.password !== form.confirmarSenha){
-            return toast.error(message[1])
-        }
-
-        let retorno = await signup(user);
-
-        if (retorno.data.status === 200) {
-            localStorage.setItem('token', retorno.data.token)
-            console.log("retorno: ", retorno);
-            
-            if(retorno.data.user.hasAddress){
-                return goToFourFood(navigate);
-            }
-            
-            setters.setHasAddress(retorno.data.user.hasAddress)
-            goToAddress(navigate);
-
-        }
-
-        if(retorno.data.status === 409){
-            return toast.error(retorno.data.error)
-        }
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword)
     }
 
     return(<InputsContainer>
         
-        <ToastContainer />
-        <form onSubmit={onSubmitForm}>
+
+        <form onSubmit=''>
             <h3>Cadastrar</h3>
 
             <TextField
                 type="text"
                 name="name"
-                value={form.name}
-                onChange={onChange}
+                value=''
+                onChange=''
                 label="Nome"
                 variant="outlined"
                 fullWidth
@@ -80,8 +37,8 @@ const SignUpForm = () => {
 
             <TextField
                 name="email"
-                value={form.email}
-                onChange={onChange}
+                value=''
+                onChange=''
                 label="E-mail"
                 variant="outlined"
                 fullWidth
@@ -92,8 +49,8 @@ const SignUpForm = () => {
             />
             <TextField
                 name="cpf"
-                value={form.cpf}
-                onChange={onChange}
+                value=''
+                onChange=''
                 label="CPF"
                 variant="outlined"
                 fullWidth
@@ -104,24 +61,33 @@ const SignUpForm = () => {
             />
 
              <TextField
-                type={'password'}
+
                 name="password"
-                value={form.password}
-                onChange={onChange}
+                value=''
+                onChange=''
                 label="Senha"
                 variant="outlined"
                 fullWidth
                 margin="normal"
                 placeholder="Mínimo 6 caracteres"
                 required
+                pattern=".{6,}"
                 InputLabelProps={{ shrink: true}}
+                type={showPassword ? "text" : "password"}
+                 InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end" onClick={handleShowPassword}>
+                                {showPassword ? <Visibility cursor="pointer" /> : <VisibilityOff cursor="pointer" />}
+                            </InputAdornment>
+                        )
+                    }}
             />
 
             <TextField
                 type={'password'}
                 name="confirmarSenha"
-                value={form.confirmarSenha}
-                onChange={onChange}
+                value=''
+                onChange=''
                 label="Confirmar"
                 variant="outlined"
                 fullWidth
@@ -129,6 +95,13 @@ const SignUpForm = () => {
                 placeholder="Confirme a senha anterior"
                 required
                 InputLabelProps={{ shrink: true}}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end" onClick={handleShowPassword}>
+                            {showPassword ? <Visibility cursor="pointer" /> : <VisibilityOff cursor="pointer" />}
+                        </InputAdornment>
+                    )
+                }}
             />
 
 

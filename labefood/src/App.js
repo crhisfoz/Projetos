@@ -19,7 +19,7 @@ const App = () => {
 
   return (<InitialContainer className='main-container'>
     <div className='main'>
-      <img src={ifuture}/>
+      <img src={ifuture} alt='logo ifuture em vermelho'/>
     </div>
     </InitialContainer>);
 }

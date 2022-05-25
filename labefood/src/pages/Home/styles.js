@@ -42,8 +42,7 @@ export const FourFoodSearch = styled.div`
     }
 `;
 export const FourFoodFooter = styled.div`
-    display: flex;
-    
+    display: flex;  
     justify-content: center;
     `
     export const ProductCategory = styled.div`
