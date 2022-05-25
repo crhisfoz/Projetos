@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@material-ui/core";
 import Header from "../../components/Header/Header";
 import useProtectedPage from "../../components/Hooks/useProtectPage";
 import {
@@ -7,7 +6,7 @@ import {
     SignUpButtonContainer
 } from './styles'
 import LoginForm from "./LoginForm";
-import Arrow from "../../components/Arrow/Arrow";
+
 
 const Login = () => {
     useProtectedPage()

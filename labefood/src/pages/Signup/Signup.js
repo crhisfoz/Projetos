@@ -6,16 +6,15 @@ import {
 } from './styles'
 import { useNavigate } from "react-router-dom";
 import Arrow from "../../components/Arrow/Arrow";
-import SignUpForm from "./SignUpForm";
+import SignUpForm from "./SignUpForm"
 import { goToLogin } from "../../routes/coordinator";
 
 const SignUp = () => {
-    const navegate = useNavigate()
+    const navigate = useNavigate()
     return(
         <LoginContainer className="login-container">
-            <Arrow onClick={()=> goToLogin(navegate)}/>
-            <Header />
-            
+            <Arrow onClick={()=> goToLogin(navigate)}/>
+            <Header />  
             <SignUpForm />
         </LoginContainer>
     )

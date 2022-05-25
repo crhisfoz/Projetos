@@ -10,7 +10,7 @@ const Header = ({ heigth }) => {
     return(<HeaderContainer className='main-container' heigth={heigth}>
     <div className='main'> 
      <div className="main-title">
-        <img src={ifuture}/>     
+        <img src={ifuture} alt='logo Ifuture em vermelho'/>     
      </div>
     </div>
     </HeaderContainer>)

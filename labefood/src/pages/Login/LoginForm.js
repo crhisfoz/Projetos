@@ -1,71 +1,52 @@
 import { Button, TextField, InputAdornment } from "@material-ui/core";
-import React, { useContext,useState} from "react";
+import React, {useState} from "react";
 import useForm from "../../hooks/useForm";
 import { InputsContainer } from "./styles";
-import { login } from "../../Services/auth"
+import { login } from "../../requests/authentication"
 import { useNavigate} from 'react-router-dom'
-import { goToAddress, goToFourFood } from "../../routes/coordinator";
+import { goToAddress, goToHome } from "../../routes/coordinator";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { GlobalStateContext } from "../../Context/GlobalState/GlobalStateContext";
 import CircularProgress from '@material-ui/core/CircularProgress'
 import {Visibility, VisibilityOff} from '@material-ui/icons'
+import axios from 'axios';
+import { BASE_URL } from "../../constants/urls";
 
-
+const headers = { 'Content-Type': 'application/json' }
 
 const LoginForm = () => {
 
-    const [form, onChange] = useForm({ email: "", password: "" });
-    const { setters } =  useContext(GlobalStateContext); 
+    const { form, onChangeForm, clearForm } = useForm({
+        email: "",
+        password: "",
+      })
+    
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-    const onSubmitForm = (event) => {
+    const onSubmitFormLogin = (ev) => {
         setLoading(true)
-        event.preventDefault();
-
-        let payload = {
-            email: form.email,
-            password: form.password
-        }
-
-        auth(payload);
-      
-    }
-
-    const auth = async (payload) => {
-        let retorno = await login(payload);
-
-        if (retorno.data.status === 200) {
-
-            setters.setInfoUser(retorno.data);        
-            localStorage.setItem('infoUser',JSON.stringify(retorno.data))
-            localStorage.setItem('token', retorno.data.token)
-          
-
-                window.alert("Seja Bem-Vindo")
-                 
-            setLoading(false)
-            goToFourFood(navigate);
-            if(retorno.data.data.hasAddress === false)  {
-                goToAddress(navigate)
-            }
-        }
-        
-        if(retorno.data.status === 401){
-            setLoading(false);
-            toast.error(retorno.data.error);
-            toast.error('Verifique os Dados digitados')
-         
-        }
-
-        if(retorno.data.status === 404){
-            setLoading(false);
-            toast.error(retorno.data.error)
-            toast.error('Verifique os Dados digitados')
-        }
-    }
+        ev.preventDefault();
+        const body = {
+          email: form.email,
+          password: form.password,
+        };
+        axios
+          .post(`${BASE_URL}/login`, body)
+          .then((res) => {
+            localStorage.setItem("token", res.data.token);
+            window.alert("Login Efetuado Com Sucesso");
+            goToHome(navigate)
+          })
+          .catch((err) => {
+            window.alert(err.response.data.message)
+          })
+          .finally(()=>{
+              clearForm()
+              setLoading(false)
+          })
+      };
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
@@ -73,32 +54,34 @@ const LoginForm = () => {
 
     return (<InputsContainer>
     
-        <form onSubmit={onSubmitForm}>
+        <form onSubmit={onSubmitFormLogin}>
             <h3>Entrar</h3>
 
             <TextField
                 name="email"
                 value={form.email}
-                onChange={onChange}
+                onChange={onChangeForm}
                 label="E-mail"
                 variant="outlined"
                 fullWidth
                 margin="normal"
                 placeholder="email@email.com"
+                autoComplete="current-email"
                 required
             />
             <TextField
                 name="password"
                 value={form.password}
-                onChange={onChange}
+                onChange={onChangeForm}
                 label="Senha"
                 variant="outlined"
                 fullWidth
                 margin="normal"
                 placeholder="Mínimo 6 caracteres"
+                pattern=".{6,}"
+                autoComplete="current-password"
                 required
                 type={showPassword ? "text" : "password"}
-                password={true}
                  InputProps={{
                         endAdornment: (
                             <InputAdornment position="end" onClick={handleShowPassword}>

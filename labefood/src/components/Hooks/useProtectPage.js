@@ -1,13 +1,13 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { goToFourFood, goToLogin} from '../../routes/coordinator'
+import { goToHome, goToLogin} from '../../routes/coordinator'
 
 const useProtectedPage = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-        goToFourFood(navigate)
+      goToHome(navigate)
     } else {
         goToLogin(navigate)
     }
