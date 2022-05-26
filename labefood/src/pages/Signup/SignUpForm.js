@@ -1,14 +1,14 @@
 import { Button, TextField, InputAdornment, CircularProgress } from "@material-ui/core";
-import {Visibility, VisibilityOff} from "@material-ui/icons"
-import React, {useState} from "react";
+import { Visibility, VisibilityOff } from "@material-ui/icons"
+import React, { useState } from "react";
 import { InputsContainer } from "./styles"
 import useForm from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../constants/urls";
 import axios from "axios";
-import {goToHome, goToAddress, goToLogin } from "../../routes/coordinator";
+import { goToHome, goToAddress, goToLogin } from "../../routes/coordinator";
 import Swal from "sweetalert2";
-import {signUp} from "../../requests/authentication"
+import { signUp } from "../../requests/authentication"
 
 const headers = { "Content-Type": "application/json" }
 
@@ -17,21 +17,21 @@ const SignUpForm = () => {
     const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
-    
+
     const [loading, setLoading] = useState(false);
 
     const [errors, setErrors] = useState({})
 
     const { form, onChangeForm, clearForm } = useForm({
-        name: "", 
-        email: "", 
+        name: "",
+        email: "",
         cpf: "",
         password: "",
         confirmPassword: ""
     });
 
 
-    const onSignupForm= async (event) =>{
+    const onSignupForm = async (event) => {
         event.preventDefault();
 
         let body = {
@@ -40,8 +40,8 @@ const SignUpForm = () => {
             cpf: form.cpf,
             password: form.password
         }
-        
-        if(form.password !== form.confirmPassword){
+        console.log('body', body)
+        if (form.password !== form.confirmPassword) {
 
             const Toast = Swal.mixin({
                 toast: true,
@@ -56,61 +56,64 @@ const SignUpForm = () => {
             })
             Toast.fire({
                 icon: "warning",
-                    title:`A Senha Digitada não confere, verifique os dados Digitados`
+                title: `A Senha Digitada Não Confere, Verifique e Digite Novamente`
             })
-        }
-        await axios.post(`${BASE_URL}/signup`, body,
-        { headers: headers })
-        .then((res) => {
-            localStorage.setItem("token", res.data.token);
+        } else {
+           await axios.post(`${BASE_URL}/signup`, body,
+                { headers: headers })
+                .then((res) => {
+                    localStorage.setItem("token", res.data.token);
+                    console.log('Response', res)
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton:false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener("mouseenter", Swal.stopTimer)
+                            toast.addEventListener("mouseleave", Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: "success",
+                        title: `Usuário Cadastrado Com Sucesso`
+                    })
+                    if(res.data.user.hasAddress === false){
+                        goToAddress(navigate)
+                    }else{
+                        goToLogin(navigate)
+                    }
 
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 1000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener("mouseenter", Swal.stopTimer)
-                    toast.addEventListener("mouseleave", Swal.resumeTimer)
-                }
-            })
-            Toast.fire({
-                icon: "success",
-                title: "Usuário Cadastrado Com Sucesso"
-            })
-            goToLogin(navigate)
-        })
-        .catch((err) => {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton:true,
-                timer: 5000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener("mouseenter", Swal.stopTimer)
-                    toast.addEventListener("mouseleave", Swal.resumeTimer)
-                }
-            })
-            Toast.fire({
-                icon: "warning",
-                title:`${err.response.data.message}, verifique os dados Digitados`
-            })
-
-        })
-        .finally(() => {
-            clearForm()
-            setLoading(false)
-        })
-};
+                
+                })
+                .catch((err)=>{
+                    console.log('Erro', err.response.data.message)
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: true,
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener("mouseenter", Swal.stopTimer)
+                            toast.addEventListener("mouseleave", Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: "warning",
+                        title: `${err.response.data.message}`
+                    })
+                })
+    }
+}
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
     }
 
-    return(<InputsContainer>
-        
+    return (<InputsContainer>
+
         <form onSubmit={onSignupForm}>
             <h3>Cadastrar</h3>
 
@@ -126,13 +129,13 @@ const SignUpForm = () => {
                 placeholder="Nome e sobrenome"
                 required
                 autoComplete="current-name"
-                InputLabelProps={{ shrink: true}}
+                InputLabelProps={{ shrink: true }}
             />
 
             <TextField
                 name="email"
                 value={form.email}
-                  onChange={onChangeForm}
+                onChange={onChangeForm}
                 label="E-mail"
                 variant="outlined"
                 fullWidth
@@ -140,7 +143,7 @@ const SignUpForm = () => {
                 placeholder="email@email.com"
                 required
                 autoComplete="current-email"
-                InputLabelProps={{ shrink: true}}
+                InputLabelProps={{ shrink: true }}
             />
             <TextField
                 name="cpf"
@@ -152,11 +155,11 @@ const SignUpForm = () => {
                 margin="normal"
                 placeholder="000.000.000-00"
                 required
-                InputLabelProps={{ shrink: true}}
+                InputLabelProps={{ shrink: true }}
                 autoComplete="current-cpf"
             />
 
-             <TextField
+            <TextField
 
                 name="password"
                 value={form.password}
@@ -169,15 +172,15 @@ const SignUpForm = () => {
                 required
                 pattern=".{6,}"
                 autoComplete="current-password"
-                InputLabelProps={{ shrink: true}}
+                InputLabelProps={{ shrink: true }}
                 type={showPassword ? "text" : "password"}
-                 InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end" onClick={handleShowPassword}>
-                                {showPassword ? <Visibility cursor="pointer" /> : <VisibilityOff cursor="pointer" />}
-                            </InputAdornment>
-                        )
-                    }}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end" onClick={handleShowPassword}>
+                            {showPassword ? <Visibility cursor="pointer" /> : <VisibilityOff cursor="pointer" />}
+                        </InputAdornment>
+                    )
+                }}
             />
 
             <TextField
@@ -191,7 +194,7 @@ const SignUpForm = () => {
                 placeholder="Confirme a senha anterior"
                 required
                 autoComplete="current-password"
-                InputLabelProps={{ shrink: true}}
+                InputLabelProps={{ shrink: true }}
                 type={showPassword ? "text" : "password"}
                 InputProps={{
                     endAdornment: (
@@ -201,7 +204,7 @@ const SignUpForm = () => {
                     )
                 }}
             />
- <Button
+            <Button
                 type="submit"
                 fullWidth
                 variant="contained"

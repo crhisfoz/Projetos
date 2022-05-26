@@ -4,7 +4,7 @@ import App from "../App";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup"
 import HomePage from "../pages/Home/HomePage"
-import Address from "../pages/Address/Address"
+import Address from "../pages/Address/Address";
 
 
 const Router = () => {
@@ -15,7 +15,7 @@ const Router = () => {
                 <Route path="/login" element={<Login /> } />
                 <Route path="/signup" element={<Signup /> } />
                 <Route path="/home" element={<HomePage/>}/>
-                <Route path="/home" element={<Address/>}/>
+                <Route path="/address" element={<Address/>}/>
             </Routes>
         </BrowserRouter>
     )
