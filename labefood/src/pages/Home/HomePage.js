@@ -9,6 +9,7 @@ import  useRequestData  from "../../hooks/useRequestData"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import {goToCart} from "../../routes/coordinator";
 import Arrow from '../../components/Arrow/Arrow'
+import useProtectedPage from "../../components/Hooks/useProtectPage";
 
 import {
     FourFoodCardContainer,
@@ -19,12 +20,14 @@ import {
 
 const HomePage = () => {
 
+    useProtectedPage()
+
     const navigate = useNavigate()
 
     const { restaurants, loading,} = useRequestData(`${BASE_URL}/restaurants`, [])
     const [input, setInput] = useState("")
 
-    console.log('data pagina home',restaurants)
+/*     console.log('data pagina home',restaurants) */
 
     const onChangeInput = (ev) => {
         setInput(ev.target.value)

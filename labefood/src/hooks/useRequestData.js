@@ -1,9 +1,15 @@
 import axios from "axios";
-
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2"
+import {goToLogin} from "../routes/coordinator"
+import { useNavigate } from "react-router-dom";
+
 
 
 export const useRequestData = (url, initialState) => {
+  
+  const navigate = useNavigate()
+  
     const [restaurants, setRestaurants] = useState(initialState);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
@@ -26,7 +32,8 @@ export const useRequestData = (url, initialState) => {
   
         } catch (err) {
           setError(err);
-          window.alert(err.response.data.message)
+          Swal.fire(err.response.data.message)
+          goToLogin(navigate)        
         } finally {
           setLoading(false);
         }
