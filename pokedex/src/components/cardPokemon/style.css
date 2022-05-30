@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Paytone+One&display=swap");
+
+.card-title {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  font-family: "Paytone One", sans-serif;
+}
+
+.card-button {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+.card-img-poke{
+  background-color: rgba(255, 255, 255, 0.6);
+  height: 12rem;
+  width: 12rem;
+  border-radius: 50%;
+  border: solid ;
+}
+
+
+.card-body {
+  display: flex;
+}
+
+small {
+  text-transform: capitalize;
+}
+
+.rock {
+  background-color: rgb(148, 81, 81);
+}
+.ghost {
+  background-color: rgb(247, 247, 247);
+}
+.electric {
+  background-color: rgb(255, 255, 161);
+}
+.bug {
+  background-color: #f6d6a7;
+}
+.poison {
+  background-color: #e0a7f6;
+}
+.normal {
+  background-color: #f4f4f4;
+}
+.fairy {
+  background-color: rgba(255, 192, 203, 0.863);
+}
+.fire {
+  background-color: #fbe3df;
+}
+.grass {
+  background-color: #e2f9e1;
+}
+.water {
+  background-color: #e0f1fd;
+}
+
+.ice {
+  background-color: #96d9d6;
+}
+
+.fighting {
+  background-color: #c22e28;
+}
+
+.ground {
+  background-color: #e2bf65;
+}
+
+.flying {
+  background-color: #a98ff3;
+}
+
+.psychic {
+  background-color: #f95587;
+}
+
+.dragon {
+  background-color: #6f35fc;
+}
+
+.dark {
+  background-color: #705746;
+}
+
+.steel {
+  background-color: #b7b7ce;
+}

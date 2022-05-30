@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+.style{
+  background-color: blue;
+}
+
+
+.card-title{
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    font-family: 'Paytone One', sans-serif;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+}
+    .card-img-pokedex{
+        background-color: rgba(255, 255, 255, 0.6);
+        height: 12rem;
+        width: 12rem;
+        border-radius: 50%;
+        border: solid ;
+      }
+      
+      img{
+        height: 10rem;
+        margin-left: 1rem;
+        width: 10rem;
+      }
