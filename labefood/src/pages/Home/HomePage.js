@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react"
-import { useNavigate} from "react-router-dom";
+import React, { useState} from "react"
+import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card/Card"
 import Filtro from "../../components/Filtro/Filtro"
 import Footer from "../../components/Footer/Footer"
 import Search from "../../components/Search/Search"
 import { BASE_URL } from "../../constants/urls"
-import  useRequestData  from "../../hooks/useRequestData"
+import useRequestData from "../../hooks/useRequestData"
 import CircularProgress from "@material-ui/core/CircularProgress"
-import {goToCart} from "../../routes/coordinator";
+import { goToCart } from "../../routes/coordinator";
 import Arrow from '../../components/Arrow/Arrow'
 import useProtectedPage from "../../components/Hooks/useProtectPage";
 
@@ -24,39 +24,37 @@ const HomePage = () => {
 
     const navigate = useNavigate()
 
-    const { restaurants, loading,} = useRequestData(`${BASE_URL}/restaurants`, [])
-    const [input, setInput] = useState("")
+    const {restaurants, loading, error, category, filter, setRestaurants} = useRequestData(`${BASE_URL}/restaurants`, [])
 
-/*     console.log('data pagina home',restaurants) */
+    const [input, setInput] = useState("")
 
     const onChangeInput = (ev) => {
         setInput(ev.target.value)
     }
 
     const showRestaurant =
-    restaurants &&
-    restaurants.filter(rest => {
+        restaurants &&
+        restaurants.filter(rest => {
             return rest.name.toLowerCase().includes(input.toLowerCase())
         })
             .map((rest, index) => {
-                return (<div  key={index}>
-                   {/*  <Filtro
-                    category={category}
-                    filter={[filter, setFilter, setRestaurants]}
-                    />  */}
+                return (<div key={index}>
+                      <Filtro
+                    data={{category, filter,setRestaurants}}
+                    />
                     <Card
-                    image={rest.logoUrl}
-                    name={rest.name}
-                    id={rest.id}
-                    delivery={rest.deliveryTime}
-                    shippingPrice={rest.shipping}
+                        image={rest.logoUrl}
+                        name={rest.name}
+                        id={rest.id}
+                        delivery={rest.deliveryTime}
+                        shippingPrice={rest.shipping}
                     />
                 </div>
                 )
             })
 
     return (<>
-    <Arrow showTitle={true} title={'Labefood'} onClick={true} />
+        <Arrow showTitle={true} title={'Labefood'} onClick={true} />
         <FourFoodSearch>
             <Search
                 input={input}
@@ -75,7 +73,7 @@ const HomePage = () => {
 
         </FourFoodCardContainer>
         <FourFoodFooter>
-            <Footer onCLick={()=>goToCart(navigate)}/>
+            <Footer/>
         </FourFoodFooter>
     </>
     )

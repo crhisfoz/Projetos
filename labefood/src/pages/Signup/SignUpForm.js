@@ -176,7 +176,7 @@ const SignUpForm = () => {
                 type={showPassword ? "text" : "password"}
                 InputProps={{
                     endAdornment: (
-                        <InputAdornment position="end" onClick={handleShowPassword}>
+                        <InputAdornment /* position="end" */ onClick={handleShowPassword}>
                             {showPassword ? <Visibility cursor="pointer" /> : <VisibilityOff cursor="pointer" />}
                         </InputAdornment>
                     )
