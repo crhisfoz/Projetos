@@ -13,7 +13,7 @@ export const FooterContainer = styled.div`
 
     .MuiSvgIcon-root{
         width: 7.5rem;
-        height: 3.062rem;
+        height: 2.062rem;
         background-color: white;
     }
 `;

@@ -5,7 +5,6 @@ import {goToLogin} from "../routes/coordinator"
 import { useNavigate } from "react-router-dom";
 
 
-
 export const useRequestData = (url, initialState) => {
   
   const navigate = useNavigate()
@@ -13,6 +12,8 @@ export const useRequestData = (url, initialState) => {
     const [restaurants, setRestaurants] = useState(initialState);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
+    const [category, setCategory] = useState([])
+    const [filter, setFilter] = useState(restaurants)
   
   
     useEffect(() => {
@@ -28,7 +29,15 @@ export const useRequestData = (url, initialState) => {
               auth: token
             }
           });
-          setRestaurants(data.restaurants)
+          const arrayCategory = []
+
+        for (let restaurant of data.restaurants) {
+          const newCategory = restaurant.category
+          arrayCategory.push(newCategory)
+        }
+        setRestaurants(data.restaurants)
+        setCategory(arrayCategory)
+        setFilter(data.restaurants)      
   
         } catch (err) {
           setError(err);
@@ -41,7 +50,7 @@ export const useRequestData = (url, initialState) => {
       fetch();
     }, []);
     
-    return {restaurants, loading, error, setRestaurants};
+    return {restaurants, loading, error, category,filter, setFilter, setRestaurants, setCategory};
   };
 
   export default useRequestData;
