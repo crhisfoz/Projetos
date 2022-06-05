@@ -1,13 +1,11 @@
-import React, { useState} from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card/Card"
-import Filtro from "../../components/Filtro/Filtro"
 import Footer from "../../components/Footer/Footer"
 import Search from "../../components/Search/Search"
 import { BASE_URL } from "../../constants/urls"
 import useRequestData from "../../hooks/useRequestData"
 import CircularProgress from "@material-ui/core/CircularProgress"
-import { goToCart } from "../../routes/coordinator";
 import Arrow from '../../components/Arrow/Arrow'
 import useProtectedPage from "../../components/Hooks/useProtectPage";
 
@@ -15,6 +13,8 @@ import {
     FourFoodCardContainer,
     FourFoodSearch,
     FourFoodFooter,
+    FiltroContainer,
+    Container
 
 } from "./styles"
 
@@ -22,60 +22,100 @@ const HomePage = () => {
 
     useProtectedPage()
 
-    const navigate = useNavigate()
+    const { restaurants, loading } = useRequestData(`${BASE_URL}/restaurants`, [])
 
-    const {restaurants, loading, error, category, filter, setRestaurants} = useRequestData(`${BASE_URL}/restaurants`, [])
+    const [selectedCategory, setSelectedCategory] = useState({
+        active: false,
+        category: "",
+    })
 
-    const [input, setInput] = useState("")
+
+    const [search, setSearch] = useState("")
 
     const onChangeInput = (ev) => {
-        setInput(ev.target.value)
+        setSearch(ev.target.value)
     }
 
-    const showRestaurant =
-        restaurants &&
-        restaurants.filter(rest => {
-            return rest.name.toLowerCase().includes(input.toLowerCase())
-        })
-            .map((rest, index) => {
-                return (<div key={index}>
-                      <Filtro
-                    data={{category, filter,setRestaurants}}
-                    />
-                    <Card
-                        image={rest.logoUrl}
-                        name={rest.name}
-                        id={rest.id}
-                        delivery={rest.deliveryTime}
-                        shippingPrice={rest.shipping}
-                    />
-                </div>
-                )
-            })
 
-    return (<>
+    const handleSelectCategory = (category) => {
+        if (selectedCategory.category === category && selectedCategory.active) {
+            setSelectedCategory({ active: false, category: "" })
+        } else {
+            setSelectedCategory({ active: true, category: category })
+        }
+    }
+
+    const filterByCategory = () => {
+        const filters = restaurants.filter((restaurant) => {
+            if (restaurant.category === selectedCategory.category) return true
+        })
+
+        return filters.map((rest) => {
+            return <Card
+                image={rest.logoUrl}
+                name={rest.name}
+                id={rest.id}
+                delivery={rest.deliveryTime}
+                shippingPrice={rest.shipping}
+            />
+        })
+    }
+
+    const categoriesList = restaurants.map((restaurant) => {
+        return restaurant.category
+    })
+        .sort((a, b) => {
+            return a.localeCompare(b)
+        })
+
+    const categories = [...new Set(categoriesList)].map((category) => {
+        return (
+            <div
+                onClick={() => {
+                    handleSelectCategory(category)
+                }}
+                key={category}
+            >
+                <ul><li>{category}</li></ul>
+            </div>
+        )
+    })
+
+    const restaurantsList = restaurants.filter(rest => {
+        return rest.name.toLowerCase().includes(search.toLowerCase())
+    })
+        .map((rest) => {
+            return <Card
+                image={rest.logoUrl}
+                name={rest.name}
+                id={rest.id}
+                delivery={rest.deliveryTime}
+                shippingPrice={rest.shipping}
+            />
+        })
+
+    return (<Container>
         <Arrow showTitle={true} title={'Labefood'} onClick={true} />
         <FourFoodSearch>
             <Search
-                input={input}
+                input={search}
                 onChangeInput={onChangeInput}
             />
         </FourFoodSearch>
+        <FiltroContainer className="filtro">
+            {categories}
+        </FiltroContainer>
 
         <FourFoodCardContainer>
             <>
                 {loading && <CircularProgress />}
-                {!loading && restaurants && restaurants.length > 0 && showRestaurant}
-                {!loading && restaurants && restaurants.length === 0 && (
-                    <h2> Não Há Restaurantes na Lista</h2>
-                )}
+                {!loading && restaurants && selectedCategory.category !== "" ? filterByCategory() : restaurantsList}
             </>
-
         </FourFoodCardContainer>
         <FourFoodFooter>
-            <Footer/>
+            <Footer />
         </FourFoodFooter>
-    </>
+    </Container>
     )
 }
 
