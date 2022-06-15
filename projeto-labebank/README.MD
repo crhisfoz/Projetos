@@ -41,6 +41,8 @@ Este projeto atual temos que criar uma aplicação nos moldes do App Ifood
 <h2 id="pre-requisitos">✅ 🖼️ Pré-requisitos </h2>
 Para começar, você terá que  instalar em sua máquina as seguintes ferramentas: Git, Node.js., Express, TypeScript, Cors, Ts-node-dev, UUid e um editor de código-fonte para trabalhar com o código, usei o VS Code.
 
+```bash
+
 # Instale as dependências
 $ npm i ou npm install
 
@@ -48,8 +50,8 @@ $ npm i ou npm install
 $ npm start
 
 # O servidor inciará na porta:3003 - acesse <http://localhost:3003>
-
 ```
+
 
 <h4 align="right"><a href="#topo">Topo</a></h4>
 
