@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { goToHome, goToLogin} from '../../routes/coordinator'
+import { goToHome, goToLogin} from '../routes/coordinator'
 
 const useProtectedPage = () => {
   const navigate = useNavigate()

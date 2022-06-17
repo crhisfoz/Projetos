@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/Header/Header";
-import useProtectedPage from "../../components/Hooks/useProtectPage";
+import useProtectedPage from "../../hooks/useProtectPage"
 import {
     LoginContainer,
     SignUpButtonContainer

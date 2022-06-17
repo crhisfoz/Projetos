@@ -1,10 +1,12 @@
+import React, {useState, useEffect} from "react";
 import axios from "axios";
-import React, { createContext, useState } from "react";
-import { BASE_URL } from "../constants/urls";
+import { BASE_URL } from "../constants/urls"
+import {GlobalStateContext} from "./GlobalStateContext"
+import Swal from "sweetalert2"
 
-export const GlobalState = createContext();
+export const GlobalState = (props) => {
 
-export const GlobalStorage = ({ children }) => {
+
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart"))
       ? JSON.parse(localStorage.getItem("cart"))
@@ -16,8 +18,10 @@ export const GlobalStorage = ({ children }) => {
       : {}
   );
   const [activeOrder, setActiveOrder] = useState({});
-
+  const [loading, setLoading] = useState(false)
+  
   const getActiveOrder = () => {
+    setLoading(true)
     axios
       .get(`${BASE_URL}/active-order`, {
         headers: {
@@ -26,24 +30,29 @@ export const GlobalStorage = ({ children }) => {
       })
       .then((res) => {
         setActiveOrder(res.data);
+        setLoading(false)
       })
       .catch((err) => {
-        window.alert("Erro ao realizar solicitação.\n Tente novamente.");
+        Swal.fire(err.response.data.message)
       });
   };
 
+
+
   return (
-    <GlobalState.Provider
-      value={{
-        cart,
-        setCart,
-        dataRestaurant,
-        setDataRestaurant,
-        activeOrder,
-        getActiveOrder,
-      }}
+    <GlobalStateContext.Provider
+    value={{
+      cart,
+      setCart,
+      dataRestaurant,
+      setDataRestaurant,
+      activeOrder,
+      getActiveOrder,
+      loading,
+      setLoading
+    }}
     >
-      {children}
-    </GlobalState.Provider>
-  );
-};
+      {props.children}
+    </GlobalStateContext.Provider>
+  )
+}

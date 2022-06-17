@@ -1,13 +1,12 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react"
 import Card from "../../components/Card/Card"
 import Footer from "../../components/Footer/Footer"
 import Search from "../../components/Search/Search"
 import { BASE_URL } from "../../constants/urls"
 import useRequestData from "../../hooks/useRequestData"
 import CircularProgress from "@material-ui/core/CircularProgress"
-import Arrow from '../../components/Arrow/Arrow'
-import useProtectedPage from "../../components/Hooks/useProtectPage";
+import Arrow from "../../components/Arrow/Arrow"
+import useProtectedPage from "../../hooks/useProtectPage"
 
 import {
     FourFoodCardContainer,
@@ -17,6 +16,7 @@ import {
     Container
 
 } from "./styles"
+
 
 const HomePage = () => {
 
@@ -95,7 +95,7 @@ const HomePage = () => {
         })
 
     return (<Container>
-        <Arrow showTitle={true} title={'Labefood'} onClick={true} />
+        <Arrow showTitle={true} title={"Labefood"} onClick={true} />
         <FourFoodSearch>
             <Search
                 input={search}

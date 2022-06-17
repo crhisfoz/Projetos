@@ -10,6 +10,7 @@ import EditAddress from "../pages/EditAdress/EditAdress";
 import Profile from "../pages/Profile/Profile"
 import EditProfile from "../pages/EditProfile/EditProfile"
 import Restaurant from "../pages/Restaurant/Restaurant"
+import Orders from "../pages/Orders/Orders"
 
 
 const Router = () => {
@@ -25,7 +26,8 @@ const Router = () => {
                 <Route path="/profile/edit" element={<EditProfile/>}/>
                 <Route path="/profile/edit-address" element={<EditAddress/>}/>
                 <Route path="/signup" element={<Signup /> } />
-                <Route path="/resturant/:id" element={<Restaurant/>} />
+                <Route path="/restaurant/:id" element={<Restaurant/>} />
+                <Route path="/orders" element={<Orders/>}/>
             </Routes>
         </BrowserRouter>
     )

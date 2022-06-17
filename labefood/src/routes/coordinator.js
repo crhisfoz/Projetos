@@ -26,15 +26,19 @@ export const goToProfile = (navigate) =>{
     navigate("/profile")
 }
 
-
-export const goTOEditProfile = (navigate) =>{
+export const goToEditProfile = (navigate) =>{
     navigate("/profile/edit")
 }
 
-export const goTOEditAddress = (navigate) =>{
+export const goToEditAddress = (navigate) =>{
     navigate("/profile/edit-address")
 }
 
 export const goBack = (navigate) =>{
     navigate(-1)
+}
+
+
+export const goToOrders = (navigate) =>{
+    navigate("/orders")
 }
