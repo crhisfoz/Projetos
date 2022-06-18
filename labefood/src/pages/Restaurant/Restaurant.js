@@ -1,16 +1,18 @@
-import {
-  FormControl,
-  MenuItem,
-  Select,
-} from "@mui/material"
+import { FormControl, MenuItem,Select,} from "@material-ui/core"
 import React, { useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { Header } from "../../components/Header"
-import { Loading } from "../../components/Loading"
-import ProductCard from "../../components/ProductCard/ProductCard"
-import { RestaurantCardDetails } from "../../components/RestaurantCardDetails"
-import { GlobalState } from "../../GlobalState/GlobalState"
-import useRequestData from "../../hooks/useRequestData"
+import { useParams, useNavigate } from "react-router-dom"
+import Header from "../../components/Header/Header";
+import CircularProgress from "@material-ui/core/CircularProgress"
+import RestaurantCardDetails from "../../components/ResponsiveCard/CardRestaurant";
+import { GlobalStateContext } from "../../global/GlobalState"
+import { CardItemAdd } from "../../components/CardItems/CardItemAdd"
+import Arrow from "../../components/Arrow/Arrow";
+import { goToHome } from "../../routes/coordinator";
+import Footer from "../../components/Footer/Footer";
+import {useRequestRestaurant} from "../../hooks/useRequestRestaurant";
+import Swal from "sweetalert2"
+
+
 import {
   ContainerModal,
   ContainerProductCategory,
@@ -25,30 +27,33 @@ const RestaurantPage = () => {
 
   const navigate = useNavigate()
 
-  const param = useParams()
-  const {  data, loading} = useRequestRestaurant({}, `/restaurants/${param.id}`)
+  const params = useParams()
+  
+  const { data, loading} = useRequestRestaurant({}, `/restaurants/${params.id}`)
   const [quantity, setQuantity] = useState(0)
   const [open, setOpen] = useState(false)
-  const { cart, setCart, dataRestaurant,setDataRestaurant } = useContext(GlobalState)
+  const { cart, setCart, dataRestaurant, setDataRestaurant } = useContext(GlobalStateContext)
   const [prod, setProd] = useState({})
 
-  console.log(data);
-  console.log(cart);
-  console.log(dataRestaurant);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart))
+  }, [cart])
+
+
 
   const openModal = (product) => {
     if (cart.length > 0) {
       if (data.restaurant.id === cart[0].idRestaurant) {
         setOpen(true)
-        setProd({ ...product, idRestaurant: param.id })
+        setProd({ ...product, idRestaurant: params.id })
 
       } else {
-        alert("Você não pode realizar pedidos em diferentes restaurantes!Esvazie seu carrinho e comece novamente")
+        Swal.fire("Você não pode realizar pedidos em diferentes restaurantes!Esvazie seu carrinho e comece novamente")
 
       }
     } else {
       setOpen(true)
-      setProd({ ...product, idRestaurant: param.id })
+      setProd({ ...product, idRestaurant: params.id })
 
     }
 
@@ -99,7 +104,7 @@ const RestaurantPage = () => {
   const renderRestaurant = data.restaurant &&
     (
       <ContainerRestaurantsDetails>
-        <CardRestaurant
+        <RestaurantCardDetails
           image={data.restaurant.logoUrl}
           name={data.restaurant.name}
           category={data.restaurant.category}
@@ -126,8 +131,8 @@ const RestaurantPage = () => {
 
   return (
     <ContainerProducts>
-     <Arrow onClick={() => goToHome(navigate)} showTitle={true} title={'Restaurante'} /> 
-      <Header  heigth={'2rem'}/>
+     <Arrow onClick={() => goToHome(navigate)} showTitle={true} title={"Restaurante"} /> 
+      <Header  heigth={"2rem"}/>
       {loading && <CircularProgress />}
       <styleRestaurant>
         {!loading && renderRestaurant}

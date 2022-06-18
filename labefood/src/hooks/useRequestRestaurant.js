@@ -24,13 +24,13 @@ export const useRequestRestaurant = (initialState, path) => {
           });
           setData(data);
         } catch (err) {
-            Swal.fire(err.response.data.message) 
+          Swal.fire(err.response.data.message)
         } finally {
           setLoading(false);
         }
       };
       fetch();
-    }, []);
+    }, [path]);
   
   return { data, loading};
   };

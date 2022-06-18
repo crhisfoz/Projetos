@@ -13,21 +13,22 @@ import Restaurant from "../pages/Restaurant/Restaurant"
 import Orders from "../pages/Orders/Orders"
 
 
+
 const Router = () => {
-    return(
+    return (
         <BrowserRouter>
             <Routes>
                 <Route exact path="" element={<App />} />
-                <Route path="/address" element={<Address/>}/>
-                <Route path="/cart/:id" element={<Cart/>} />
-                <Route path="/home" element={<HomePage/>}/>
-                <Route path="/login" element={<Login /> } />
-                <Route path="/profile" element={<Profile/>} />
-                <Route path="/profile/edit" element={<EditProfile/>}/>
-                <Route path="/profile/edit-address" element={<EditAddress/>}/>
-                <Route path="/signup" element={<Signup /> } />
-                <Route path="/restaurant/:id" element={<Restaurant/>} />
-                <Route path="/orders" element={<Orders/>}/>
+                <Route path="/address" element={<Address />} />
+                <Route path="/cart/:id" element={<Cart />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/edit" element={<EditProfile />} />
+                <Route path="/profile/edit-address" element={<EditAddress />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/restaurant/:id" element={<Restaurant />} />
+                <Route path="/orders" element={<Orders />} />
             </Routes>
         </BrowserRouter>
     )

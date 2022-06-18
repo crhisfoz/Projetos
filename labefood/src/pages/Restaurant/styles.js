@@ -6,7 +6,6 @@ export const ContainerRestaurantsDetails = styled.div`
   margin: 64px 0 1rem 0;
 `
 
-
 export const ContainerProductCategory = styled.div`
   margin: 1rem 1rem 0.5rem;
 

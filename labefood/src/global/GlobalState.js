@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, createContext} from "react";
 import axios from "axios";
 import { BASE_URL } from "../constants/urls"
-import {GlobalStateContext} from "./GlobalStateContext"
 import Swal from "sweetalert2"
 
-export const GlobalState = (props) => {
 
+export const GlobalStateContext = createContext();
+
+export const GlobalState = (props) => {
 
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart"))
@@ -37,6 +38,9 @@ export const GlobalState = (props) => {
       });
   };
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify([]))
+  }, [cart])
 
 
   return (
