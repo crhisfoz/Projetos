@@ -1,9 +1,11 @@
 import Button  from "@material-ui/core/Button"
 import styled from "styled-components"
+import { blackColor } from "../../constants/colors"
 
 export const ContainerRestaurantsDetails = styled.div`
   margin: 64px 0 1rem 0;
 `
+
 
 export const ContainerProductCategory = styled.div`
   margin: 1rem 1rem 0.5rem;
@@ -58,7 +60,7 @@ export const ModalSelect = styled.div`
     line-height: normal;
     letter-spacing: -0.39px;
     text-align: center;
-    color:#000;
+    color:${blackColor}
   }
 `
 

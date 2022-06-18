@@ -1,16 +1,16 @@
-import { FormControl, MenuItem, Select} from '@material-ui/core'
+import {
+  FormControl,
+  MenuItem,
+  Select,
+} from "@mui/material"
 import React, { useContext, useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import Header from '../../components/Header/Header';
-import CircularProgress from '@material-ui/core/CircularProgress'
-import CardRestaurant from '../../components/ResponsiveCard/CardRestaurant';
-import { GlobalState } from '../../global/GlobalState'; 
-import { CardItemAdd } from '../../components/CardItems/CardItemAdd'
-import Arrow from '../../components/Arrow/Arrow';
-import { goToHome } from "../../routes/coordinator";
-import Footer from '../../components/Footer/Footer';
-import {useRequestRestaurant} from "../../hooks/useRequestRestaurant"
-
+import { useParams } from "react-router-dom"
+import { Header } from "../../components/Header"
+import { Loading } from "../../components/Loading"
+import ProductCard from "../../components/ProductCard/ProductCard"
+import { RestaurantCardDetails } from "../../components/RestaurantCardDetails"
+import { GlobalState } from "../../GlobalState/GlobalState"
+import useRequestData from "../../hooks/useRequestData"
 import {
   ContainerModal,
   ContainerProductCategory,
@@ -90,7 +90,6 @@ const RestaurantPage = () => {
             product={product}
             quantity={product.quantity}
             openModal={openModal}
-
           />
         )
       }
